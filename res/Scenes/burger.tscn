@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7ngrfua0i3f8"]
+
+[ext_resource type="Texture2D" uid="uid://pyqixds06eos" path="res://Texture/jump1.svg" id="1_nm6i7"]
+[ext_resource type="Script" path="res://Scripts/burger.gd" id="1_rdqut"]
+[ext_resource type="Texture2D" uid="uid://comspdunt8i3y" path="res://Texture/jump2.svg" id="2_37gnj"]
+[ext_resource type="Script" path="res://Scripts/burger_jump.gd" id="4_215wx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w2mud"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nm6i7")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqqq0"]
+
+[node name="Burger" type="CharacterBody2D"]
+process_mode = 1
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_rdqut")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w2mud")
+animation = &"jump"
+script = ExtResource("4_215wx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(6.18281, 6.18281)
+shape = SubResource("RectangleShape2D_hqqq0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_37gnj")
+
+[connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
